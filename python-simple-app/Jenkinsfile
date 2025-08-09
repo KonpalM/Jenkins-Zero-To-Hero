@@ -2,20 +2,9 @@ pipeline {
     agent none
 
     stages {
-        stage('Install dependencies') {
-            agent {
-                docker { image 'python:3.10-slim' }
-            }
-            steps {
-                sh 'python --version'
-                sh 'pip install --upgrade --user pip'
-                sh 'pip install --user -r requirements.txt'
-            }
-        }
-
         stage('Run tests') {
             agent {
-                docker { image 'python:3.10-slim' }
+                docker { image 'kmaharwal1/python-pytest:latest' }
             }
             steps {
                 sh 'pytest --maxfail=1 --disable-warnings -q'
