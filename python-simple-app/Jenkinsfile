@@ -1,6 +1,15 @@
 pipeline {
     agent none
     stages {
+        stage('Run app') {
+            agent {
+                docker { image 'kmaharwal1/python-pytest:latest' }
+            }
+            steps {
+                sh 'python --version'
+                sh 'python app.py'
+            }
+        }
         stage('Run tests') {
             agent {
                 docker { image 'kmaharwal1/python-pytest:latest' }
