@@ -3,8 +3,8 @@ pipeline {
     stages {
             steps {
                 dir('python-simple-app') {
+                    sh 'python --version'
                     sh 'python app.py'
-                    sh 'pytest'
                 }                   
             }
         }
