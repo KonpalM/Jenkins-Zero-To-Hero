@@ -6,8 +6,10 @@ pipeline {
                 docker { image 'kmaharwal1/python-pytest:latest' }
             }
             steps {
-                sh 'python --version'
-                sh 'python app.py'
+                dir('python-simple-app') {
+                    sh 'python app.py'
+                    sh 'pytest'
+                }                   
             }
         }
         stage('Run tests') {
