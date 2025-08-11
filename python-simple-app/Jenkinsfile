@@ -1,16 +1,20 @@
 pipeline {
     agent { docker { image 'kmaharwal1/python-pytest:latest' } }
+
     stages {
+        stage('Run app') {
             steps {
                 dir('python-simple-app') {
-                    sh 'python --version'
                     sh 'python app.py'
-                }                   
+                }
             }
         }
+
         stage('Run tests') {
             steps {
-                sh 'pytest --maxfail=1 --disable-warnings -q'
+                dir('python-simple-app') {
+                    sh 'pytest --maxfail=1 --disable-warnings -q'
+                }
             }
         }
     }
